@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Sole Society</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div th:replace="~{fragments/header-fragment :: header}"></div>
+    	<div th:replace="~{fragments/main-nav :: nav}"></div>
+
+    <div class="main-content content-wrapper"> 
+    	<h2>The Sole Society</h2>
+    	
+       <div class="product-container" id="productContainer">
+   			
+	  </div>
+        
+    </div>
+
+    <div th:replace="~{fragments/footer-fragment :: footer}"></div>
+     <script>
+        fetch('/api/products/getAll')
+            .then(response => response.json())
+            .then(products => {
+                const productContainer = document.getElementById('productContainer');
+                products.forEach(product => {
+                    const productItem = document.createElement('div');
+                    productItem.innerHTML = `
+                        <div class="product-item">
+                            <div class="product-image">
+                                <img data-image="${product.imageUrls}" alt="${product.name}">
+                            </div>
+                            <div class="product-details">
+                                <div class="product-title" data-name="${product.name}"></div>
+                                <div class="product-lowest-ask">Lowest Ask</div>
+                                <div class="product-price" data-price="${product.retailPrice}"></div>
+                                <div class="product-ship">Xpress Ship</div>
+                                <div class="product-brand" data-brand="${product.brand.name}"></div>
+                                <div class="product-subcategory" data-subcategory="${product.subcategory.name}"></div>
+                                <div class="product-type" data-type="${product.productType.name}"></div>
+                                <div class="product-release-date" data-release="${product.releaseDate}"></div>
+                                <div class="product-colorway" data-colorway="${product.colorway}"></div>
+                                <div class="product-style-code" data-style-code="${product.styleCode}"></div>
+                                <div class="product-size" data-size="${product.size}"></div>
+                                <div class="product-status" data-status="${product.status}"></div>
+                                <div class="product-quantity" data-quantity="${product.quantity}"></div>
+                                <div class="product-discount" data-discount="${product.discount}"></div>
+                            </div>
+                            <button class="product-favorite" data-id="${product.productId}">♡</button>
+                        </div>
+                    `;
+
+                    productItem.querySelector('.product-image img').src = productItem.querySelector('.product-image img').dataset.image;
+                    productItem.querySelector('.product-title').textContent = productItem.querySelector('.product-title').dataset.name;
+                    productItem.querySelector('.product-price').textContent = '$' + productItem.querySelector('.product-price').dataset.price;
+
+                    productContainer.appendChild(productItem);
+                });
+            });
+    </script>
+</body>
+</html>

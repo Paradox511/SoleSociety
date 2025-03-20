@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Sole Society</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<div class="auth-container">
+    <div class="auth-tabs">
+        <button class="tab-button active" data-tab="login">Login</button>
+        <button class="tab-button" data-tab="signup">Signup</button>
+    </div>
+
+    <div class="auth-forms">
+        <div class="tab-content active" id="login">
+            <h2>Login</h2>
+            <form id="login-form" action="/login" method="post">
+                <input type="text" name="username" placeholder="Username" required>
+                <div class="password-container">
+                    <input type="password" name="password" placeholder="Password" required id="password-input">
+                    <button type="button" id="show-password" class="show-password">Show</button>
+                </div>
+                <a href="/forgot-password" class="forgot-password">Forgot Password?</a>
+                <button type="submit">Login</button>
+
+                <div class="social-login-divider">
+                <span>or login with</span>
+            </div>
+
+            <div class="social-login-buttons">
+                <button class="social-button facebook-button" ><img src "/images/Logo/Facebook.png"/></button>
+                <button class="social-button google-button"><img src "/images/Logo/Google.png"/></button>
+            </div>
+            </form>
+        </div>
+
+        <div class="tab-content" id="signup">
+            <h2>Signup</h2>
+            <form id="signup-form" action="/signup" method="post">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit">Signup</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+const tabButtons = document.querySelectorAll('.tab-button');
+const tabContents = document.querySelectorAll('.tab-content');
+
+tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const tabId = button.dataset.tab;
+
+        // Remove active classes
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+
+        // Add active classes to the selected tab and content
+        button.classList.add('active');
+        document.getElementById(tabId).classList.add('active');
+
+        // Change the page title
+        if (tabId === 'login') {
+            document.title = 'Login';
+        } else if (tabId === 'signup') {
+            document.title = 'Signup';
+        }
+    });
+});
+</script>

@@ -1,0 +1,440 @@
+/* Basic Reset */
+h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0; /* Reset margin */
+    padding: 0; /* Reset padding */
+}
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+.a:hover {
+    color: #000;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 0;
+    padding: 0 20px;
+}
+
+
+/* Login-Signup Styles */
+.auth-container {
+    width: 300px;
+    margin: 50px auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.auth-tabs {
+    display: flex;
+}
+
+.tab-button {
+    flex: 1;
+    padding: 10px 15px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.tab-button.active {
+    background-color: #ddd;
+}
+
+.auth-forms {
+    padding: 20px;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.auth-forms form {
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-forms input {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.auth-forms button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.password-container {
+    position: relative;
+}
+
+#password {
+    padding-right: 80px; /* Adjust for the show password button */
+}
+
+.show-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.forgot-password {
+    display: block;
+    text-align: right;
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+
+.social-login-divider {
+    text-align: center;
+    margin: 20px 0;
+    position: relative;
+}
+
+.social-login-divider span {
+    background-color: white; /* Or your background color */
+    padding: 0 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.social-login-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #ddd;
+    transform: translateY(-50%);
+}
+
+.social-login-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.social-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.facebook-button {
+     border: 1px solid #ddd;
+ 
+}
+
+.google-button {
+
+    border: 1px solid #ddd;
+}
+/* Header Styles */
+.site-header {
+    background-color: #121212;
+    padding: 15px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.header-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.logo {
+    margin-right: auto;
+    display:block;
+}
+
+.logo a {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ff8000;
+}
+
+.main-nav {
+    position: relative; /* Or absolute, depending on your layout */
+    z-index: 10; /* Ensure it's above other elements */
+    background-color: #3d3d3d;
+	    /* Add other positioning styles as needed */
+}
+
+.main-nav ul {
+    list-style: none;
+    padding: auto;
+    margin: 0;
+    display: flex; /* Use Flexbox for horizontal layout */
+    height : 48px;
+    width : 1400px;
+    -webkit-justify-content: center;
+}
+
+.main-nav li {
+    position: relative; /* Needed for pop-up positioning */
+    padding: 0 10px;
+    margin: auto;
+}
+.main-nav a {
+    color: #ffffff;
+    font-size: 1em;
+    align: left;
+    transition: color 0.3s ease;
+}
+
+.main-nav a:hover {
+    color: #ff8040;
+}
+.category-popup {
+    display: none; /* Initially hide the pop-up */
+    position: absolute;
+    top: 100%; /* Position below the navigation item */
+    left: 0;
+    background-color: #3d3d3d; /* Or your desired background */
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 100; /* Ensure it's above other elements */
+}
+.category-popup ul{
+	height: 48px;
+	width:auto;
+	list-style: none;
+    padding: auto;
+    margin: 0;
+    justify-content: center;
+	
+}
+.brands-menu:hover .category-popup {
+    display: block; /* Show pop-up on hover */
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar {
+    display: flex;
+    margin-right: 20px;
+}
+
+.search-bar input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    width:700px;
+}
+
+.search-bar button {
+    padding: 8px 15px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+    background-color: #333;
+}
+
+.user-actions{
+	margin-right:auto;
+}
+.user-actions a {
+    margin-left: 15px;
+    font-size: 1em;
+    color: #ffffff;
+    transition: color 0.3s ease;
+}
+
+.user-actions a:hover {
+    color: #ff8040;
+}
+
+/* Content Wrapper */
+.main-content {
+    color: #ffffff; /* White text for contrast */
+    background-color: #121212; /* Match header background */
+    padding: 10px 20px; /* Add padding for spacing */
+}
+
+.content-wrapper {
+    flex: 1;
+}
+
+/* Footer Styles */
+.site-footer {
+    background-color: #121212; /* Match header background */
+    padding: 30px 0;
+    border-top: 1px solid #e0e0e0;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.footer-section {
+    margin-bottom: 20px;
+    width: 200px;
+}
+
+.footer-section h4 {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    color: #ff8000; /* Orange headings */
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section li {
+    margin-bottom: 5px;
+}
+
+.footer-section a {
+    color: #ffffff; /* White links */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: #ff8040; /* Orange hover effect */
+}
+
+.footer-section p {
+    color: #ffffff; /* White copyright text */
+    font-size: 0.9em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-section {
+        width: 100%;
+        text-align: center;
+    }
+}
+/* Product styling */
+.product-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow products to wrap to the next line */
+    justify-content: flex-start; /* Align items to the start of the container */
+    gap: 15px; /* Add spacing between products */
+    padding: 20px; /* Add padding around the container */
+    background-color: black; /* Or your desired background color */
+}
+.product-container:hover{
+	cursor:pointer;
+}
+
+.product-item {
+    width: 200px; /* Adjust as needed */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden; /* Hide any content that overflows the container */
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    position: relative; /* For favorite button positioning */
+}
+
+.product-image {
+    width: 100%;
+    height: 150px; /* Adjust as needed */
+    overflow: hidden;
+    transition: transform 0.3s ease; /* Add transition for smooth effect */
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease; /* Add transition for smooth effect */
+}
+
+.product-item:hover .product-image img {
+    transform: scale(1.1); /* Zoom in on hover */
+}
+
+.product-details {
+    padding: 15px;
+    background-color:black;
+    height:114px;
+    width:200px;
+}
+
+.product-title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color:white;
+}
+
+.product-lowest-ask {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.product-price {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color:white;
+}
+
+.product-ship {
+    font-size: 12px;
+    color: #007bff; /* Or your desired color */
+}
+
+.product-favorite {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}

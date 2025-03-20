@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<nav class="main-nav">
+    <div class="container">
+        <ul>
+            <li class="brands-menu">
+                <a href="/brands">Brands</a>
+   					<div th:replace="~{fragments/category-popup-fragment :: categoryPopup(items=${brands})}"></div>
+            </li>
+            <li class="apparel-menu">
+                <a href="/apparel">Apparel</a>
+                </li>
+            <li class="accessories-menu">
+                <a href="/accessories">Accessories</a>
+                </li>
+        </ul>
+    </div>
+</nav>

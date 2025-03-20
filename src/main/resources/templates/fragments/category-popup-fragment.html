@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="categoryPopup(items)" class="category-popup">
+    <div class="category-popup-content">
+        <ul>
+            <li th:each="brand : ${brands}">
+ 				<a th:href="@{'/brands/' + ${brand.brandName}}" th:text="${brand.brandName}"></a>
+             </li>
+        </ul>
+    </div>
+</div>
+</html>
