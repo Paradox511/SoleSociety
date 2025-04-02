@@ -14,10 +14,10 @@
     <div class="auth-forms">
         <div class="tab-content active" id="login">
             <h2>Login</h2>
-            <form id="login-form" action="/login" method="post">
-                <input type="text" name="username" placeholder="Username" required>
+            <form id="login-form" action="/api/users/login" method="post">
+                <input type="text" id="login-username" name="username" placeholder="Username" required>
                 <div class="password-container">
-                    <input type="password" name="password" placeholder="Password" required id="password-input">
+                    <input type="password" name="password" placeholder="Password" required id="login-password">
                     <button type="button" id="show-password" class="show-password">Show</button>
                 </div>
                 <a href="/forgot-password" class="forgot-password">Forgot Password?</a>
@@ -36,11 +36,34 @@
 
         <div class="tab-content" id="signup">
             <h2>Signup</h2>
-            <form id="signup-form" action="/signup" method="post">
-                <input type="text" name="username" placeholder="Username" required>
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="password" name="password" placeholder="Password" required>
+            <form id="signup-form" action="/api/users/createUser" method="post">
+                <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            
+            <label for="password-confirm">Confirm password:</label>
+            <input type="password" id="password-confirm" name="password-confirm" required>
+
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName">
+            
+             <label for="phoneNumber">Phone Number:</label>
+            <input type="tel" id="phoneNumber" name="phoneNumber">
+            
                 <button type="submit">Signup</button>
+            <div class="social-login-divider">
+                <span>or login with</span>
+            </div>
+
+            <div class="social-login-buttons">
+                <button class="social-button facebook-button" ><img src "/images/Logo/Facebook.png"/></button>
+                <button class="social-button google-button"><img src "/images/Logo/Google.png"/></button>
+            </div>
             </form>
         </div>
     </div>
@@ -49,6 +72,8 @@
 <script>
 const tabButtons = document.querySelectorAll('.tab-button');
 const tabContents = document.querySelectorAll('.tab-content');
+const urlParams = new URLSearchParams(window.location.search);
+const tab = urlParams.get('tab');
 
 tabButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -70,4 +95,87 @@ tabButtons.forEach(button => {
         }
     });
 });
+if (tab === 'login') {
+    document.querySelector('button[data-tab="login"]').click();
+} else if (tab === 'signup') {
+    document.querySelector('button[data-tab="signup"]').click();
+}
+document.getElementById('signup-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('password-confirm').value;
+
+    if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+    }
+
+    const formData = {
+        username: document.getElementById('username').value,
+        email: document.getElementById('email').value,
+        password: password, // Send the plain password to the server
+        fullName: document.getElementById('fullName').value,
+        phoneNumber: document.getElementById('phoneNumber').value,
+    };
+
+    fetch('/api/users/createUser', { // Replace with your signup API endpoint
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Sign up successful!');
+            // Redirect or perform other actions
+        } else {
+            return response.json().then(errorData => {
+                alert('Sign up failed: ' + errorData.message); // Access the error message from the JSON
+            });
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred during sign up.');
+    });
+});
+document.getElementById('login-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const formData = {
+        username: document.getElementById('login-username').value,
+        password: document.getElementById('login-password').value,
+    };
+
+    fetch('/api/users/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json(); // Parse the JSON response
+        } else {
+            return response.json().then(errorData => {
+                alert('Login failed: ' + errorData.message);
+                throw new Error('Login failed'); // Added to stop the promise chain
+            });
+        }
+    })
+    .then(userData => {
+        // Redirect to "/" and pass user data
+    	localStorage.setItem('jwtToken', userData.token);
+        // Redirect to "/"
+        window.location.href = '/';
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred during login.');
+    });
+});
+
 </script>

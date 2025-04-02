@@ -81,8 +81,7 @@ a {
 
 .auth-forms button {
     padding: 10px 15px;
-    background-color: #007bff;
-    color: white;
+    background-color: rgb(255, 128, 0);
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -438,3 +437,48 @@ a {
     font-size: 20px;
     cursor: pointer;
 }
+/* profile side-bar styles*/
+.sidebar {
+            width: 250px; /* Adjust as needed */
+            background-color: #3d3d3d;
+            border-right: 1px #ffffff solid;
+            padding: 20px;
+            box-sizing: border-box;
+            height: 100vh; /* Full viewport height */
+            float: left; /* Float to the left */
+        }
+
+        .sidebar h2 {
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #ffffff;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .sidebar a:hover {
+            background-color: #ff8040;
+        }
+        .profile-container {
+            display: flex; /* Use flexbox */
+            height: 100vh; /* Full viewport height */
+        }
+        .divider{
+        	border-bottom: 1px #ffffff solid;
+        	padding-top:10px;
+        	padding-bottom:10px;
+        }

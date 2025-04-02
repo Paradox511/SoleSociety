@@ -6,12 +6,19 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <div th:replace="~{fragments/header-fragment :: header}"></div>
-    	<div th:replace="~{fragments/main-nav :: nav}"></div>
+      <div id="header-container">
+        <th:block th:if="${isLoggedIn}">
+            <div th:replace="~{fragments/header-logged-in :: headerLoggedIn}"></div>
+        </th:block>
+        <th:block th:unless="${isLoggedIn}">
+            <div th:replace="~{fragments/header-logged-out :: headerLoggedOut}"></div>
+        </th:block>
+    </div>
+    <div th:replace="~{fragments/main-nav :: nav}"></div>
 
     <div class="main-content content-wrapper"> 
     	<h2>The Sole Society</h2>
-    	
+<p>Is Logged In: <span th:text="${isLoggedIn}"></span></p>
        <div class="product-container" id="productContainer">
    			
 	  </div>
@@ -58,6 +65,59 @@
                     productContainer.appendChild(productItem);
                 });
             });
+        fetch('/api/users/profile')
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else if (response.status === 401) {
+                // User is not logged in or an error occurred
+                console.log("User is not logged in or token is invalid.");
+                // Redirect to login page or display a message
+               // window.location.href = '/'; // Redirect to login
+                return null; // Stop further processing
+            } else {
+                console.log("Response from /api/users/profile:", response); // Add this line
+                // Handle other errors
+                return null;
+            }
+        })
+        .then(userData => {
+            if (userData) {
+                // Display the user data on the "/" page
+                document.getElementById('user-welcome').textContent = 'Welcome, ' + userData.username + '!';
+                console.log("Welcome" + userData.username);
+            } else {
+                // The user is not logged in or an error occurred.
+                console.log("User is not logged in, or an error occurred.");
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching user data:', error);
+            // Handle the error (e.g., redirect to login)
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoutButton = document.getElementById('logoutButton');
+
+            if (logoutButton) {
+                logoutButton.addEventListener('click', function(event) {
+                    event.preventDefault();
+
+                    fetch('/api/users/logout', {
+                        method: 'POST'
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            window.location.href = '/';
+                        } else {
+                            console.error('Logout failed');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error during logout:', error);
+                    });
+                });
+            }
+        });
     </script>
 </body>
 </html>

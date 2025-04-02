@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <header th:fragment="headerLoggedIn" class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a class="title" href="/">Sole Society</a>
+                </div>
+                <div class="header-actions">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search...">
+                        <button type="submit">Search</button>
+                    </div>
+                    <div class="user-actions">
+                        <span id="user-welcome"></span>
+                        <a href="/profile"><img src="/images/Logo/Profile.jpg"></a>
+                        <a id="logoutButton" href="javascript:void(0);">Logout</a>
+                        <a href="/cart">Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+</body>
+<script>
+</script>
+</html>

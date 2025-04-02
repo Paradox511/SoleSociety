@@ -2,6 +2,7 @@ package com.example.sneaker.entities;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.UUID;
 
 import jakarta.persistence.*;
 
@@ -10,9 +11,8 @@ import jakarta.persistence.*;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
-    private Long productId;
+    private UUID productId;
 
     @Column(name = "product_name", nullable = false)
     private String name;
@@ -47,23 +47,19 @@ public class Product {
     @Column(name = "image_urls")
     private String imageUrls; // Consider using a more appropriate data structure
     
-    @Column(name = "size")
-    private BigDecimal size; // Consider using a more appropriate data structure
-    
+   
     @Column(name ="status")
     private int status;
     
-    @Column(name = "quantity")
-    private int quantity;
-    
+  
     @Column(name="discount")
     private int discount;
 
     public Product() {}
     
-	public Product(Long productId, String name, String description, Brand brand, Subcategory subcategory,
+	public Product(UUID productId, String name, String description, Brand brand, Subcategory subcategory,
 			ProductType productType, LocalDate releaseDate, BigDecimal retailPrice, String colorway, String styleCode,
-			String imageUrls,BigDecimal size,int status,int quantity,int discount) {
+			String imageUrls,int status,int discount) {
 		super();
 		this.productId = productId;
 		this.name = name;
@@ -76,17 +72,15 @@ public class Product {
 		this.colorway = colorway;
 		this.styleCode = styleCode;
 		this.imageUrls = imageUrls;
-		this.size = size;
 		status = 1;
-		quantity=0;
 		discount=0;
 	}
 
-	public Long getProductId() {
+	public UUID getProductId() {
 		return productId;
 	}
 
-	public void setProductId(Long productId) {
+	public void setProductId(UUID productId) {
 		this.productId = productId;
 	}
 
@@ -170,13 +164,7 @@ public class Product {
 		this.imageUrls = imageUrls;
 	}
 
-	public BigDecimal getSize() {
-		return size;
-	}
-
-	public void setSize(BigDecimal size) {
-		this.size = size;
-	}
+	
 
 	public int getStatus() {
 		return status;
@@ -186,13 +174,7 @@ public class Product {
 		this.status = status;
 	}
 
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+	
 
 	public int getDiscount() {
 		return discount;

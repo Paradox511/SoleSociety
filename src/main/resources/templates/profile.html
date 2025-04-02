@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title>
+        <link rel="stylesheet" href="/css/styles.css">
+    
+</head>
+<body>
+ 		<div id="header-container">
+        <div th:if="${isLoggedIn}" th:replace="~{fragments/header-logged-in :: header}"></div>
+        </div>
+            	<div th:replace="~{fragments/main-nav :: nav}"></div>
+        
+        		<div class="profile-container">
+        
+         <div th:replace="~{fragments/profile-sidebar-fragment :: sidebar}"></div>
+        
+                <div class="main-content content-wrapper"> 
+                <h2><strong>Profile</strong></h2>
+                <p class="divider">Personal Information:</p>
+        <p><strong>Name:</strong> <span id="profile-name"></span></p>
+        <p><strong>Email:</strong> <span id="profile-email"></span></p>
+        <p><strong>Username:</strong> <span id="profile-username"></span></p>
+        </div>
+        </div>
+    <script src="/js/profile.js"></script>
+</body>
+</html>

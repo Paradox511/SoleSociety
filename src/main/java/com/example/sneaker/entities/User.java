@@ -15,7 +15,6 @@ import java.util.Set;
 public class User {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "user_id")
     private UUID userId;
 
@@ -27,7 +26,7 @@ public class User {
 
     @Lob
     @Column(nullable = false)
-    private byte[] passwordHash;
+    private String passwordHash;
 
     @Lob
     @Column(nullable = false)
@@ -90,11 +89,11 @@ public class User {
 		this.email = email;
 	}
 
-	public byte[] getPasswordHash() {
+	public String getPasswordHash() {
 		return passwordHash;
 	}
 
-	public void setPasswordHash(byte[] passwordHash) {
+	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
 	}
 
@@ -229,5 +228,12 @@ public class User {
 	public void setFavorites(Set<Favorite> favorites) {
         this.favorites = favorites;
     }
+
+
+
+	public void setPasswordHash(byte[] bytes) {
+		// TODO Auto-generated method stub
+		this.passwordHash= bytes.toString();
+	}
 }
 
